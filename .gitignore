@@ -1,0 +1,17 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+shamela_env/
+
+# Scraper output
+shamela_output/
+
+# OS files
+.DS_Store
+
+# IDE/project files
+.vscode/
