@@ -13,10 +13,19 @@
 # so Excel opens Arabic text correctly.
 
 import os, re, csv
+from datetime import datetime
+import pytz
 from .config import OUTPUT_DIR, REPORT
 
+INDIA_TZ = pytz.timezone("Asia/Kolkata")
+
 FIELDS = ["category", "book", "book_id", "author", "publisher", "edition",
-          "total_pages", "pages_scraped", "status", "topics", "url", "file"]
+          "total_pages", "pages_scraped", "status", "scraped_at", "topics", "url", "file"]
+
+
+def india_now():
+    """Return current Indian Standard Time as a readable string (DD-MM-YYYY HH:MM:SS IST)."""
+    return datetime.now(INDIA_TZ).strftime("%d-%m-%Y %H:%M:%S IST")
 
 
 def _book_row(fpath, cat, by_id):
@@ -44,6 +53,7 @@ def _book_row(fpath, cat, by_id):
         "total_pages":   e.get("total_pages", ""),
         "pages_scraped": pages_scraped,
         "status":        e.get("status", "partial"),
+        "scraped_at":    e.get("scraped_at", ""),  # saved at scrape time in Indian time
         "topics":        e.get("topics", ""),
         "url":           url,
         "file":          fpath,

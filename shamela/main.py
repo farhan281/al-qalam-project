@@ -19,7 +19,7 @@ from .config import BASE_URL, OUTPUT_DIR, DELAY
 from .helpers import load_progress, save_progress, safe_name, ar2int
 from .discovery import get_categories, get_books
 from .scraper import scrape_book
-from .report import generate_report
+from .report import generate_report, india_now
 from .git_sync import git_push
 
 
@@ -115,10 +115,11 @@ def main():
 
             # ── Update progress ───────────────────────────────────────────
             new_entry = {
-                "title":  book_title,
-                "pages":  pages,
-                "status": "complete" if complete else "partial",
-                **meta,  # author, publisher, edition, total_pages, topics, category
+                "title":      book_title,
+                "pages":      pages,
+                "status":     "complete" if complete else "partial",
+                "scraped_at": india_now(),  # Indian Standard Time timestamp
+                **meta,
             }
             if not complete:
                 # Save the exact page ID we stopped at so next run can resume
