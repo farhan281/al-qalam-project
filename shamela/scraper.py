@@ -17,11 +17,15 @@
 #   }
 
 import re, time
+from collections import namedtuple
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 from .config import BASE_URL, PAGE_DELAY
 from .helpers import fetch, get_soup, ar2int
 from .metadata import fetch_meta
+
+# Named return type — clearer than a raw 5-tuple and prevents unpacking mistakes
+ScrapeResult = namedtuple("ScrapeResult", ["text", "page_count", "complete", "next_page_id", "meta"])
 
 
 def scrape_book(book_id, book_title, resume_page_id=None,
@@ -47,7 +51,7 @@ def scrape_book(book_id, book_title, resume_page_id=None,
       existing_pages : Page count already done (sets the progress bar start)
       known_total    : Total pages expected (sets the progress bar maximum)
 
-    Returns a 5-tuple:
+    Returns ScrapeResult(text, page_count, complete, next_page_id, meta):
       text          : Complete book text (existing + newly scraped)
       page_count    : Total pages scraped across all runs
       complete      : True if we reached the last page naturally
@@ -141,4 +145,10 @@ def scrape_book(book_id, book_title, resume_page_id=None,
     finally:
         pbar.close()  # always close the bar, even if an exception occurred
 
-    return "\n".join(all_text), page_count, complete, page_id, meta
+    return ScrapeResult(
+        text="\n".join(all_text),
+        page_count=page_count,
+        complete=complete,
+        next_page_id=page_id,
+        meta=meta,
+    )

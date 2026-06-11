@@ -39,7 +39,9 @@ def _book_row(fpath, cat, by_id):
                 break
 
     # Count chapter separator lines as a proxy for pages scraped
-    content       = open(fpath, encoding="utf-8").read()
+    # Use the same `with` block to avoid opening the file twice
+    with open(fpath, encoding="utf-8") as f:
+        content = f.read()
     pages_scraped = len(re.findall(r"^--- ص", content, re.MULTILINE))
 
     e = by_id.get(book_id, {})
@@ -82,6 +84,11 @@ def generate_report(done):
 
     for cat in sorted(os.listdir(OUTPUT_DIR)):
         cat_path = os.path.join(OUTPUT_DIR, cat)
+        # Resolve real path and confirm it stays inside OUTPUT_DIR (prevent path traversal)
+        real_base = os.path.realpath(OUTPUT_DIR)
+        real_cat  = os.path.realpath(cat_path)
+        if not real_cat.startswith(real_base + os.sep):
+            continue
         if not os.path.isdir(cat_path):
             continue  # skip top-level files like progress.json
 

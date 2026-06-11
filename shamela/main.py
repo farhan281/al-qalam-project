@@ -101,29 +101,27 @@ def main():
                 time.sleep(DELAY)
                 continue
 
-            text, pages, complete, next_page_id, meta = result
-
             # ── Save .txt file ────────────────────────────────────────────
-            # Resume mode: existing_text is already inside `text` — write as-is
+            # Resume mode: existing_text is already inside result.text — write as-is
             # Fresh mode : prepend the header block (title + URL + separator)
             header = f"الكتاب: {book_title}\nالرابط: {BASE_URL}/book/{book_id}\n{'='*60}\n\n"
             with open(txt_file, "w", encoding="utf-8") as f:
-                f.write(text if (resume_page_id and existing_text) else header + text)
+                f.write(result.text if (resume_page_id and existing_text) else header + result.text)
 
-            status_icon = "✅" if complete else "⚠️ partial"
-            tqdm.write(f"    {status_icon}  {book_title[:55]}  ({pages} pages)")
+            status_icon = "✅" if result.complete else "⚠️ partial"
+            tqdm.write(f"    {status_icon}  {book_title[:55]}  ({result.page_count} pages)")
 
             # ── Update progress ───────────────────────────────────────────
             new_entry = {
                 "title":      book_title,
-                "pages":      pages,
-                "status":     "complete" if complete else "partial",
+                "pages":      result.page_count,
+                "status":     "complete" if result.complete else "partial",
                 "scraped_at": india_now(),  # Indian Standard Time timestamp
-                **meta,
+                **result.meta,
             }
-            if not complete:
+            if not result.complete:
                 # Save the exact page ID we stopped at so next run can resume
-                new_entry["next_page_id"] = next_page_id
+                new_entry["next_page_id"] = result.next_page_id
 
             if resume_page_id:
                 # meta is empty in resume mode — keep the metadata from the old entry
