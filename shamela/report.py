@@ -112,6 +112,7 @@ def generate_report(done):
         # Per-category CSV: shamela_output/reports/العقيدة.csv
         if cat_rows:
             _write_csv(os.path.join(REPORTS_DIR, f"{cat}.csv"), cat_rows)
+            _write_csv(os.path.join(cat_path, f"{cat}.csv"), cat_rows)
 
     # Master CSV: shamela_output/reports/report.csv
     _write_csv(REPORT, all_rows)

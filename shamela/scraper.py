@@ -29,7 +29,8 @@ ScrapeResult = namedtuple("ScrapeResult", ["text", "page_count", "complete", "ne
 
 
 def scrape_book(book_id, book_title, resume_page_id=None,
-                existing_text="", existing_pages=0, known_total=0):
+                existing_text="", existing_pages=0, known_total=0,
+                checkpoint_func=None):
     """
     Download the full text of one book, page by page.
 
@@ -44,12 +45,14 @@ def scrape_book(book_id, book_title, resume_page_id=None,
       - Prepend existing_text so the final output is the full book
 
     Args:
-      book_id        : Shamela numeric book ID string (e.g. "6388")
-      book_title     : Human-readable title, used for display only
-      resume_page_id : AJAX page ID to restart from; None = fresh start
-      existing_text  : Text already saved from a previous partial run
-      existing_pages : Page count already done (sets the progress bar start)
-      known_total    : Total pages expected (sets the progress bar maximum)
+      book_id         : Shamela numeric book ID string (e.g. "6388")
+      book_title      : Human-readable title, used for display only
+      resume_page_id  : AJAX page ID to restart from; None = fresh start
+      existing_text   : Text already saved from a previous partial run
+      existing_pages  : Page count already done (sets the progress bar start)
+      known_total     : Total pages expected (sets the progress bar maximum)
+      checkpoint_func : optional callback(next_page_id, page_count, page_text, complete)
+                        called after each page is processed or on failure.
 
     Returns ScrapeResult(text, page_count, complete, next_page_id, meta):
       text          : Complete book text (existing + newly scraped)
@@ -103,14 +106,19 @@ def scrape_book(book_id, book_title, resume_page_id=None,
             if not r:
                 # All retries exhausted — save partial and resume next run
                 tqdm.write(f"    [ERROR] page {page_id}: giving up after retries")
+                if checkpoint_func:
+                    checkpoint_func(page_id, page_count, "", False)
                 break
 
             try:
                 data = r.json()
             except Exception as e:
                 tqdm.write(f"    [ERROR] page {page_id}: bad JSON — {e}")
+                if checkpoint_func:
+                    checkpoint_func(page_id, page_count, "", False)
                 break
 
+            page_chunk = ""
             nass = data.get("nass", "")
             if nass:
                 sp = BeautifulSoup(nass, "html.parser")
@@ -124,19 +132,23 @@ def scrape_book(book_id, book_title, resume_page_id=None,
                 page_title = data.get("title", "")
 
                 if page_title:
-                    # Insert a readable chapter separator line
-                    all_text.append(f"\n--- ص{page_num}: {page_title} ---\n")
+                    page_chunk = f"\n--- ص{page_num}: {page_title} ---\n{text}"
                     # Update the progress bar description with the current chapter
                     pbar.set_description(f"ص{page_num}: {page_title[:28]}")
+                else:
+                    page_chunk = text
 
-                all_text.append(text)
+                all_text.append(page_chunk)
 
             page_count += 1
             pbar.update(1)
 
             # Follow the linked list: nextId=null means this was the last page
             next_id = data.get("nextId")
-            page_id = int(next_id) if next_id else None
+            next_page_id = int(next_id) if next_id else None
+            if checkpoint_func:
+                checkpoint_func(next_page_id, page_count, page_chunk, False)
+            page_id = next_page_id
 
             time.sleep(PAGE_DELAY)  # be gentle with the server between pages
 

@@ -84,16 +84,49 @@ def main():
                 resume_page_id = entry.get("next_page_id")  # saved checkpoint page
                 existing_pages = entry.get("pages", 0)
                 if resume_page_id and os.path.exists(txt_file):
-                    # Load already-saved text so scraper can append to it
+                    # Load already-saved text so scraper can continue from the file
                     with open(txt_file, encoding="utf-8") as f:
                         existing_text = f.read().rstrip()
                 else:
                     resume_page_id = None  # checkpoint missing or file gone — restart
 
+            # Prepare output file for append mode on resume or write mode for new book
+            if resume_page_id and os.path.exists(txt_file):
+                mode = "a"
+            else:
+                mode = "w"
+                header = f"الكتاب: {book_title}\nالرابط: {BASE_URL}/book/{book_id}\n{'='*60}\n\n"
+
+            def checkpoint_page(next_page_id, page_count, page_chunk, complete):
+                """Write page chunk and save progress for the current book."""
+                if page_chunk:
+                    with open(txt_file, "a", encoding="utf-8") as f:
+                        f.write(page_chunk)
+
+                new_entry = {
+                    "title":      book_title,
+                    "pages":      page_count,
+                    "status":     "complete" if complete else "partial",
+                    "scraped_at": india_now(),
+                    **entry,
+                }
+                if not complete:
+                    new_entry["next_page_id"] = next_page_id
+                else:
+                    new_entry.pop("next_page_id", None)
+
+                done[done_key] = new_entry
+                save_progress(done)
+
             # ── Scrape ────────────────────────────────────────────────────
+            if mode == "w":
+                with open(txt_file, "w", encoding="utf-8") as f:
+                    f.write(header)
+
             result = scrape_book(
                 book_id, book_title,
-                resume_page_id, existing_text, existing_pages, known_total
+                resume_page_id, existing_text, existing_pages, known_total,
+                checkpoint_func=checkpoint_page
             )
 
             if not result:
@@ -101,39 +134,25 @@ def main():
                 time.sleep(DELAY)
                 continue
 
-            # ── Save .txt file ────────────────────────────────────────────
-            # Resume mode: existing_text is already inside result.text — write as-is
-            # Fresh mode : prepend the header block (title + URL + separator)
-            header = f"الكتاب: {book_title}\nالرابط: {BASE_URL}/book/{book_id}\n{'='*60}\n\n"
-            with open(txt_file, "w", encoding="utf-8") as f:
-                f.write(result.text if (resume_page_id and existing_text) else header + result.text)
-
             status_icon = "✅" if result.complete else "⚠️ partial"
             tqdm.write(f"    {status_icon}  {book_title[:55]}  ({result.page_count} pages)")
 
-            # ── Update progress ───────────────────────────────────────────
-            new_entry = {
-                "title":      book_title,
-                "pages":      result.page_count,
-                "status":     "complete" if result.complete else "partial",
-                "scraped_at": india_now(),  # Indian Standard Time timestamp
-                **result.meta,
-            }
-            if not result.complete:
-                # Save the exact page ID we stopped at so next run can resume
-                new_entry["next_page_id"] = result.next_page_id
-
-            if resume_page_id:
-                # meta is empty in resume mode — keep the metadata from the old entry
-                for k in ("author", "publisher", "edition", "total_pages", "topics", "category"):
-                    if not new_entry.get(k):
-                        new_entry[k] = entry.get(k, "")
-
-            done[done_key] = new_entry
-            save_progress(done)    # write progress.json immediately
-            generate_report(done)  # keep report.csv in sync
-            git_push(f"scraped: {book_title[:60]}")
-            time.sleep(DELAY)
+            # If the book finished within this run, ensure final progress and report are saved
+            if result.complete:
+                final_entry = {
+                    "title":      book_title,
+                    "pages":      result.page_count,
+                    "status":     "complete",
+                    "scraped_at": india_now(),
+                    **entry,
+                    **result.meta,
+                }
+                final_entry.pop("next_page_id", None)
+                done[done_key] = final_entry
+                save_progress(done)
+                generate_report(done)
+                git_push(f"scraped: {book_title[:60]}")
+                time.sleep(DELAY)
 
         book_bar.close()
 
