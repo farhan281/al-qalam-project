@@ -1,5 +1,5 @@
-﻿category,book,book_id,author,publisher,edition,total_pages,pages_scraped,status,scraped_at,topics,url,file,*تنويه هام,book_index,cat_index,أعده للشاملة,البحث في,الرابط,الكتاب,المحقق,النص,بحث في محتوى الكتب,تنبيهات هامة,حققه وقدم له وعلق عليه,صفحة المؤلف,عام النشر,عدد الأجزاء,لدعم المشروع*,نبذة عن المشروع,نتائج البحث
-الشعر_ودواوينه,ديوان الأفوه الأودي,14278,,,,,57,partial,11-06-2026 19:30:36 IST,,https://shamela.ws/book/14278,shamela_output/الشعر_ودواوينه/ديوان_الأفوه_الأودي.txt,,,,,,,,,,,,,,,,,,
-الشعر_ودواوينه,ديوان امرئ القيس ت المصطاوي,27112,,,,,146,partial,11-06-2026 19:30:36 IST,,https://shamela.ws/book/27112,shamela_output/الشعر_ودواوينه/ديوان_امرئ_القيس_ت_المصطاوي.txt,,,,,,,,,,,,,,,,,,
-الشعر_ودواوينه,ديوان طرفة بن العبد,36422,,,,,9,partial,11-06-2026 19:30:36 IST,,https://shamela.ws/book/36422,shamela_output/الشعر_ودواوينه/ديوان_طرفة_بن_العبد.txt,,,,,,,,,,,,,,,,,,
-الشعر_ودواوينه,ديوان عمرو بن قميئة,149481,,,,,54,partial,11-06-2026 19:30:36 IST,,https://shamela.ws/book/149481,shamela_output/الشعر_ودواوينه/ديوان_عمرو_بن_قميئة.txt,,,,,,,,,,,,,,,,,,
+﻿category,book,book_id,author,publisher,edition,total_pages,pages_scraped,status,scraped_at,topics,url,file,book_index,cat_index
+الشعر_ودواوينه,ديوان الأفوه الأودي,14278,,,,,57,partial,11-06-2026 19:30:45 IST,,https://shamela.ws/book/14278,shamela_output/الشعر_ودواوينه/ديوان_الأفوه_الأودي.txt,,
+الشعر_ودواوينه,ديوان امرئ القيس ت المصطاوي,27112,,,,,146,partial,11-06-2026 19:30:45 IST,,https://shamela.ws/book/27112,shamela_output/الشعر_ودواوينه/ديوان_امرئ_القيس_ت_المصطاوي.txt,,
+الشعر_ودواوينه,ديوان طرفة بن العبد,36422,,,,,17,partial,11-06-2026 19:30:45 IST,,https://shamela.ws/book/36422,shamela_output/الشعر_ودواوينه/ديوان_طرفة_بن_العبد.txt,,
+الشعر_ودواوينه,ديوان عمرو بن قميئة,149481,,,,,54,partial,11-06-2026 19:30:45 IST,,https://shamela.ws/book/149481,shamela_output/الشعر_ودواوينه/ديوان_عمرو_بن_قميئة.txt,,
