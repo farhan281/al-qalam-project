@@ -28,11 +28,13 @@ shamela_project/
 │
 └── shamela_output/          ← Created automatically on first run
     ├── progress.json        ← Per-book status, page count, metadata
-    ├── report.csv           ← CSV summary of all books
+    ├── report.csv           ← Master CSV summary of ALL books
     ├── العقيدة/
+    │   ├── report.csv       ← CSV for this category only
     │   ├── الفقه_الأكبر.txt
     │   └── كتاب_الأصنام.txt
     ├── الفقه/
+    │   ├── report.csv
     │   └── ...
     └── ...
 ```
@@ -170,6 +172,13 @@ Three nested tqdm bars run simultaneously:
 
 ### `shamela_output/<category>/<book>.txt`
 Plain text, UTF-8, one file per book.
+
+### `shamela_output/report.csv`
+Master report — every book from every category in one file.
+
+### `shamela_output/<category>/report.csv`
+Per-category report — only the books inside that folder.
+Updated automatically after every book in that category.
 
 ### `shamela_output/progress.json`
 ```json

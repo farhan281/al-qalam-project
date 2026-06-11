@@ -1,78 +1,92 @@
 # shamela/report.py
 # ─────────────────────────────────────────────
-# Generates report.csv from the output folder.
+# Generates two levels of CSV reports:
 #
-# Walks every .txt file on disk (ground truth for
-# what was actually saved), counts pages, then
-# merges in metadata from the progress dict.
+#   1. shamela_output/report.csv
+#      Master report — every book from every category in one file.
+#
+#   2. shamela_output/<category>/report.csv
+#      Per-category report — only the books in that folder.
+#      Written whenever a book in that category is saved.
+#
+# Both CSVs share the same columns and UTF-8-sig encoding
+# so Excel opens Arabic text correctly.
 
 import os, re, csv
 from .config import OUTPUT_DIR, REPORT
 
+FIELDS = ["category", "book", "book_id", "author", "publisher", "edition",
+          "total_pages", "pages_scraped", "status", "topics", "url", "file"]
+
+
+def _book_row(fpath, cat, by_id):
+    """Build one CSV row from a single .txt file and the progress lookup."""
+    url, book_id = "", ""
+    with open(fpath, encoding="utf-8") as f:
+        for line in f:
+            if line.startswith("الرابط:"):
+                url     = line.split("الرابط:")[-1].strip()
+                book_id = url.rstrip("/").split("/")[-1]
+                break
+
+    # Count chapter separator lines as a proxy for pages scraped
+    content       = open(fpath, encoding="utf-8").read()
+    pages_scraped = len(re.findall(r"^--- ص", content, re.MULTILINE))
+
+    e = by_id.get(book_id, {})
+    return {
+        "category":      cat,
+        "book":          os.path.basename(fpath).replace(".txt", "").replace("_", " "),
+        "book_id":       book_id,
+        "author":        e.get("author", ""),
+        "publisher":     e.get("publisher", ""),
+        "edition":       e.get("edition", ""),
+        "total_pages":   e.get("total_pages", ""),
+        "pages_scraped": pages_scraped,
+        "status":        e.get("status", "partial"),
+        "topics":        e.get("topics", ""),
+        "url":           url,
+        "file":          fpath,
+    }
+
+
+def _write_csv(path, rows):
+    """Write rows to a CSV file with UTF-8-sig encoding."""
+    with open(path, "w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDS)
+        writer.writeheader()
+        writer.writerows(rows)
+
 
 def generate_report(done):
     """
-    Write (or overwrite) report.csv summarising every scraped book.
+    Regenerate both the master report and every per-category report.
 
-    Data sources:
-      .txt file header line  -> url, book_id
-      .txt file content      -> pages_scraped  (count of '--- ص' separators)
-      progress dict (done)   -> author, publisher, edition, total_pages,
-                                topics, status
+    Master  → shamela_output/report.csv            (all books, all categories)
+    Per-cat → shamela_output/<category>/report.csv (books in that category only)
 
-    The file is UTF-8-sig encoded so Excel opens Arabic text correctly
-    without needing to manually set the encoding.
-
-    Called after every book finishes so the CSV is always up to date.
+    Called after every book so both CSVs stay in sync.
     """
-    # Build a quick lookup: book_id -> progress entry
-    by_id = {k.split("_")[1]: v for k, v in done.items()}
-    rows  = []
+    by_id      = {k.split("_")[1]: v for k, v in done.items()}
+    all_rows   = []
 
     for cat in sorted(os.listdir(OUTPUT_DIR)):
         cat_path = os.path.join(OUTPUT_DIR, cat)
         if not os.path.isdir(cat_path):
-            continue  # skip progress.json and report.csv at the top level
+            continue  # skip top-level files like progress.json
 
+        cat_rows = []
         for fname in sorted(os.listdir(cat_path)):
+            # Skip the per-category report itself
             if not fname.endswith(".txt"):
                 continue
+            row = _book_row(os.path.join(cat_path, fname), cat, by_id)
+            cat_rows.append(row)
+            all_rows.append(row)
 
-            fpath = os.path.join(cat_path, fname)
+        # Write per-category CSV inside the category folder
+        if cat_rows:
+            _write_csv(os.path.join(cat_path, "report.csv"), cat_rows)
 
-            # Read just the header lines to get the URL (and from it, book_id)
-            url, book_id = "", ""
-            with open(fpath, encoding="utf-8") as f:
-                for line in f:
-                    if line.startswith("الرابط:"):
-                        url     = line.split("الرابط:")[-1].strip()
-                        book_id = url.rstrip("/").split("/")[-1]
-                        break
-
-            # Count '--- ص' separator lines as a proxy for pages scraped
-            content       = open(fpath, encoding="utf-8").read()
-            pages_scraped = len(re.findall(r"^--- ص", content, re.MULTILINE))
-
-            e = by_id.get(book_id, {})
-            rows.append({
-                "category":      cat,
-                "book":          fname.replace(".txt", "").replace("_", " "),
-                "book_id":       book_id,
-                "author":        e.get("author", ""),
-                "publisher":     e.get("publisher", ""),
-                "edition":       e.get("edition", ""),
-                "total_pages":   e.get("total_pages", ""),
-                "pages_scraped": pages_scraped,
-                "status":        e.get("status", "partial"),
-                "topics":        e.get("topics", ""),
-                "url":           url,
-                "file":          fpath,
-            })
-
-    fields = ["category", "book", "book_id", "author", "publisher", "edition",
-              "total_pages", "pages_scraped", "status", "topics", "url", "file"]
-
-    with open(REPORT, "w", encoding="utf-8-sig", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fields)
-        writer.writeheader()
-        writer.writerows(rows)
+    # Write master CSV at the top level
+    _write_csv(REPORT, all_rows)
