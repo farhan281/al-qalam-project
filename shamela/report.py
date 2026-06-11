@@ -1,21 +1,19 @@
 # shamela/report.py
 # ─────────────────────────────────────────────
-# Generates two levels of CSV reports:
+# Generates CSV reports inside shamela_output/reports/
 #
-#   1. shamela_output/report.csv
-#      Master report — every book from every category in one file.
+#   reports/report.csv      <- master (every book, every category)
+#   reports/العقيدة.csv     <- only العقيدة books
+#   reports/الفقه.csv       <- only الفقه books
+#   ...
 #
-#   2. shamela_output/<category>/report.csv
-#      Per-category report — only the books in that folder.
-#      Written whenever a book in that category is saved.
-#
-# Both CSVs share the same columns and UTF-8-sig encoding
+# All CSVs share the same columns and UTF-8-sig encoding
 # so Excel opens Arabic text correctly.
 
 import os, re, csv
 from datetime import datetime
 import pytz
-from .config import OUTPUT_DIR, REPORT
+from .config import OUTPUT_DIR, REPORTS_DIR, REPORT
 
 INDIA_TZ = pytz.timezone("Asia/Kolkata")
 
@@ -38,10 +36,9 @@ def _book_row(fpath, cat, by_id):
                 book_id = url.rstrip("/").split("/")[-1]
                 break
 
-    # Count chapter separator lines as a proxy for pages scraped
-    # Use the same `with` block to avoid opening the file twice
     with open(fpath, encoding="utf-8") as f:
         content = f.read()
+    # Count chapter separator lines as a proxy for pages scraped
     pages_scraped = len(re.findall(r"^--- ص", content, re.MULTILINE))
 
     e = by_id.get(book_id, {})
@@ -72,13 +69,15 @@ def _write_csv(path, rows):
 
 def generate_report(done):
     """
-    Regenerate both the master report and every per-category report.
+    Regenerate master and per-category CSVs inside shamela_output/reports/.
 
-    Master  → shamela_output/report.csv            (all books, all categories)
-    Per-cat → shamela_output/<category>/report.csv (books in that category only)
+      reports/report.csv     <- all books from all categories
+      reports/<cat>.csv      <- books from that category only
 
-    Called after every book so both CSVs stay in sync.
+    Called after every book so all CSVs stay in sync.
     """
+    os.makedirs(REPORTS_DIR, exist_ok=True)
+
     # Build lookup: book_id -> progress entry
     # Guard against malformed keys that don't contain '_'
     by_id = {}
@@ -86,30 +85,33 @@ def generate_report(done):
         parts = k.split("_", 1)
         if len(parts) == 2:
             by_id[parts[1]] = v
-    all_rows   = []
+
+    all_rows = []
 
     for cat in sorted(os.listdir(OUTPUT_DIR)):
         cat_path = os.path.join(OUTPUT_DIR, cat)
-        # Resolve real path and confirm it stays inside OUTPUT_DIR (prevent path traversal)
+
+        # Confirm path stays inside OUTPUT_DIR (prevent path traversal)
         real_base = os.path.realpath(OUTPUT_DIR)
         real_cat  = os.path.realpath(cat_path)
         if not real_cat.startswith(real_base + os.sep):
             continue
         if not os.path.isdir(cat_path):
             continue  # skip top-level files like progress.json
+        if cat == "reports":
+            continue  # skip the reports folder itself
 
         cat_rows = []
         for fname in sorted(os.listdir(cat_path)):
-            # Skip the per-category report itself
             if not fname.endswith(".txt"):
                 continue
             row = _book_row(os.path.join(cat_path, fname), cat, by_id)
             cat_rows.append(row)
             all_rows.append(row)
 
-        # Write per-category CSV inside the category folder — named after the category
+        # Per-category CSV: shamela_output/reports/العقيدة.csv
         if cat_rows:
-            _write_csv(os.path.join(cat_path, f"{cat}.csv"), cat_rows)
+            _write_csv(os.path.join(REPORTS_DIR, f"{cat}.csv"), cat_rows)
 
-    # Write master CSV at the top level
+    # Master CSV: shamela_output/reports/report.csv
     _write_csv(REPORT, all_rows)

@@ -7,10 +7,11 @@
 import requests
 
 # ── URLs & paths ──────────────────────────────
-BASE_URL   = "https://shamela.ws"
-OUTPUT_DIR = "shamela_output"
-PROGRESS   = f"{OUTPUT_DIR}/progress.json"
-REPORT     = f"{OUTPUT_DIR}/report.csv"
+BASE_URL    = "https://shamela.ws"
+OUTPUT_DIR  = "shamela_output"
+REPORTS_DIR = f"{OUTPUT_DIR}/reports"   # all CSV reports live here
+PROGRESS    = f"{OUTPUT_DIR}/progress.json"
+REPORT      = f"{REPORTS_DIR}/report.csv"  # master CSV
 
 # ── Scraping behaviour ────────────────────────
 DELAY      = 1.5   # seconds to wait between books (keeps us polite to the server)
