@@ -1,12 +1,8 @@
-# Shamela Scraper — Project Documentation
+# Shamela Scraper
 
-## Ye Project Kya Hai?
-
-Ye ek Python-based web scraper hai jo **shamela.ws** (Al-Maktaba Al-Shamela) se
-Islamic books ka poora text automatically download karta hai.
-
-Shamela duniya ki sabse badi Arabic Islamic digital library hai jisme
-**10,000+** books hain — Quran tafseer, Hadith, Fiqh, Aqeedah wagera.
+A Python scraper for **shamela.ws** (Al-Maktaba Al-Shamela) — the world's largest
+Arabic Islamic digital library with 10,000+ books across Quran tafseer, Hadith,
+Fiqh, Aqeedah and more.
 
 ---
 
@@ -15,12 +11,23 @@ Shamela duniya ki sabse badi Arabic Islamic digital library hai jisme
 ```
 shamela_project/
 │
-├── shamela_scraper.py       ← Main scraper (poora kaam yehi karta hai)
-├── shamela_env/             ← Python virtual environment (dependencies)
+├── run.py                   ← Entry point — run this to start scraping
 │
-└── shamela_output/          ← Scraper ka output (auto-create hota hai)
-    ├── progress.json        ← Har book ka status track karta hai
-    ├── report.csv           ← Tamam books ki summary CSV
+├── shamela/                 ← Main package (one file per responsibility)
+│   ├── __init__.py          ← Exposes main()
+│   ├── config.py            ← All settings + shared HTTP session
+│   ├── helpers.py           ← Utilities: fetch, retry, progress load/save
+│   ├── metadata.py          ← Extracts author, publisher, topics from book page
+│   ├── discovery.py         ← Fetches category list and book list
+│   ├── scraper.py           ← Core AJAX page-by-page download loop
+│   ├── report.py            ← Generates report.csv
+│   └── main.py              ← Orchestrates the full run with tqdm bars
+│
+├── shamela_env/             ← Python virtual environment
+│
+└── shamela_output/          ← Created automatically on first run
+    ├── progress.json        ← Per-book status, page count, metadata
+    ├── report.csv           ← CSV summary of all books
     ├── العقيدة/
     │   ├── الفقه_الأكبر.txt
     │   └── كتاب_الأصنام.txt
@@ -31,118 +38,109 @@ shamela_project/
 
 ---
 
-## Kaise Kaam Karta Hai — Step by Step
+## How It Works
 
-### Step 1: Categories Fetch
-```
-shamela.ws (homepage)
-    └── #cats section
-        ├── العقيدة  (ID: 1)
-        ├── الفقه    (ID: 2)
-        ├── الحديث   (ID: 3)
-        └── ... (42+ categories)
-```
-Script homepage parse karke tamam categories aur unke IDs nikaalti hai.
+### 1 — Category Discovery (`discovery.py`)
+Parses the homepage `#cats` section to get every category name and ID.
 
-### Step 2: Books Fetch (Har Category Ke Liye)
 ```
-shamela.ws/category/1
-    └── book_title links
-        ├── الفقه الأكبر   → /book/6388
-        ├── كتاب الأصنام   → /book/6513
-        └── ...
+shamela.ws  →  العقيدة (ID 1), الفقه (ID 2), الحديث (ID 3) ...
 ```
 
-### Step 3: Book Page Fetch (Metadata Ke Liye)
+### 2 — Book Discovery (`discovery.py`)
+For each category, fetches `/category/{id}` and collects all book links.
+
+### 3 — Metadata Extraction (`metadata.py`)
+Visits each book's landing page `/book/{id}` and reads the "betaka" card:
+
 ```
-shamela.ws/book/6388
-    └── .betaka-index section
-        ├── المؤلف: أبو حنيفة      ← author
-        ├── الناشر: مكتبة الفرقان  ← publisher
-        ├── الطبعة: الأولى          ← edition
-        ├── عدد الصفحات: ١٦٧       ← total pages
-        └── Table of Contents      ← topics
-    └── breadcrumb: العقيدة        ← category
+المؤلف        → author
+الناشر        → publisher
+الطبعة        → edition
+عدد الصفحات  → total_pages
+.betaka-index → topics (table of contents)
+breadcrumb    → category name
 ```
 
-### Step 4: AJAX API Se Text Download
-Shamela pages ek linked list ki tarah hain. Har page mein agla page ka ID hota hai:
+### 4 — AJAX Page Download (`scraper.py`)
+Shamela serves text through an AJAX endpoint. Pages form a **linked list** —
+each page's JSON contains the ID of the next page.
+
 ```
-GET /ajax/pageContent/6388/10001
-Response JSON:
+GET /ajax/pageContent/{book_id}/{page_id}
+
+Response:
 {
-  "nass":    "<p>page text HTML</p>",
-  "title":   "وحدانية الله تعالى",
+  "nass":    "<p>page HTML</p>",
+  "title":   "chapter name",
   "pageNum": "١٤",
-  "nextId":  "10002"    ← agla page; NULL agar last page
+  "nextId":  "10002"    ← null on the last page
 }
 
-10001 → 10002 → 10003 → ... → NULL (book khatam)
+10001 → 10002 → 10003 → ... → null  (book complete)
 ```
 
-### Step 5: Text File Save
+### 5 — Saved Output (`report.py`)
+Each book is saved as a plain UTF-8 `.txt` file:
+
 ```
 الكتاب: الفقه الأكبر
 الرابط: https://shamela.ws/book/6388
 ============================================================
 
 --- ص14: وحدانية الله تعالى ---
-وَالله تَعَالَى وَاحِد لَا من طَرِيق الْعدَد...
-
---- ص16: الصفات الذاتية والفعلية ---
-اما الذاتية فالحياة وَالْقُدْرَة...
+وَالله تَعَالَى وَاحِد ...
 ```
 
 ---
 
-## Resume Feature — Kaise Kaam Karta Hai?
+## Resume Feature
 
-Agar internet cut ho ya Ctrl+C dabao to kaam barbaad nahi hota.
+If the connection drops or you press Ctrl+C, **no work is lost**.
 
-### progress.json mein partial book ki entry:
+When a book is interrupted, `progress.json` stores:
+
 ```json
 "1_6388": {
   "title": "الفقه الأكبر",
-  "pages": 45,
   "status": "partial",
+  "pages": 45,
   "next_page_id": 10046,
   "author": "أبو حنيفة",
   "total_pages": "١٦٧"
 }
 ```
 
-### Agli baar jab script chale:
-1. progress.json load hota hai
-2. `status == "partial"` dekhe to `next_page_id` se resume karta hai
-3. Existing `.txt` file load karke us par append karta hai
-4. Book complete hone par `status` → `"complete"` aur `next_page_id` hata deta hai
+On the next run:
+1. `progress.json` is loaded
+2. Books with `status: partial` resume from `next_page_id`
+3. The existing `.txt` file is loaded and new pages are appended
+4. On completion `status` becomes `complete` and `next_page_id` is removed
 
-### Complete book skip condition:
+A book is only skipped when **both** conditions are true:
 ```
 status == "complete"  AND  pages_scraped >= total_pages
 ```
-Dono conditions zaruri hain taaki purani galat entries dubara scrape hon.
 
 ---
 
-## Retry Logic — Timeouts Ko Handle Karna
+## Retry Logic
 
-Shamela server kabhi kabhi slow hota hai ya timeout deta hai.
-Scraper automatically retry karta hai:
+Every HTTP request retries up to 5 times with increasing wait:
 
 ```
-Attempt 1 fail → wait 5s  → retry
-Attempt 2 fail → wait 10s → retry
-Attempt 3 fail → wait 15s → retry
-Attempt 4 fail → wait 20s → retry
-Attempt 5 fail → wait 25s → give up, save partial
+fail → wait 5s → retry
+fail → wait 10s → retry
+fail → wait 15s → retry
+fail → wait 20s → retry
+fail → wait 25s → save partial, move on
 ```
-
-Partial save hoti hai taaki resume ho sake.
 
 ---
 
-## Terminal Output — Kya Dikhta Hai
+## Terminal Output
+
+Three nested tqdm bars run simultaneously:
 
 ```
 📚 Fetching categories...
@@ -150,30 +148,29 @@ Partial save hoti hai taaki resume ho sake.
 
 📁 العقيدة  —  38 books  (2 ✅ done, 36 to scrape)
 
-  [OUTER BAR]  📁 العقيدة          ██████░░░░  1/42 categories [00:05<03:20]
-
-  [BOOK BAR]   📚 الفقه الأكبر     ████░░░░░░ 12/36 books [05:20<16:00]
-
-  [PAGE BAR]   ص27: القول في الصفات  ████████░░ 92/167 [00:45<01:20 1.2pg/s]
+📁 العقيدة           ██░░░░░░░░  1/42 categories [00:05<03:20]
+  📚 الفقه الأكبر    ████░░░░░░  3/36 books      [01:10<09:40]
+    ص27: القول في الصفات ████████░░ 92/167 [00:45<01:20 1.2pg/s]
 
     ✅  الفقه الأكبر  (167 pages)
-    ⚠️  كتاب الأصنام  (45 pages)   ← partial (timeout hua)
-    ❌  Failed: ...                 ← completely fail
+    ⚠️  كتاب الأصنام  (45 pages)   ← partial (timed out)
+    ❌  Failed: ...
 ```
 
-**3 nested bars:**
-1. **Category bar** — overall kitni categories process huin
-2. **Book bar** — is category mein kitni books huin
-3. **Page bar** — current book ke kitne pages ho gaye (chapter title live update hota hai)
+| Bar | Tracks |
+|-----|--------|
+| Outer | Categories processed out of total |
+| Middle | Books done within the current category |
+| Inner | Pages downloaded for the current book (with live chapter title) |
 
 ---
 
 ## Output Files
 
-### 1. `shamela_output/<category>/<book_title>.txt`
-Plain text file, UTF-8 encoded, Arabic text.
+### `shamela_output/<category>/<book>.txt`
+Plain text, UTF-8, one file per book.
 
-### 2. `shamela_output/progress.json`
+### `shamela_output/progress.json`
 ```json
 {
   "1_6388": {
@@ -181,82 +178,69 @@ Plain text file, UTF-8 encoded, Arabic text.
     "pages": 167,
     "status": "complete",
     "author": "أبو حنيفة النعمان (ت ١٥٠هـ)",
-    "publisher": "مكتبة الفرقان - الإمارات العربية",
-    "edition": "الأولى، ١٤١٩هـ - ١٩٩٩م",
+    "publisher": "مكتبة الفرقان",
+    "edition": "الأولى، ١٤١٩هـ",
     "total_pages": "١٦٧",
     "topics": "بيان أصول الإيمان | وحدانية الله تعالى | ...",
     "category": "العقيدة"
   }
 }
 ```
-Key format: `{cat_id}_{book_id}`
 
-### 3. `shamela_output/report.csv`
+### `shamela_output/report.csv`
+
 | Column | Description |
-|---|---|
-| category | Shamela category folder |
+|--------|-------------|
+| category | Category folder name |
 | book | Book title |
-| book_id | Shamela book ID |
-| author | Author with death year |
+| book_id | Shamela numeric ID |
+| author | Author name with death year |
 | publisher | Publisher name |
 | edition | Edition and year |
 | total_pages | Total printed pages (Arabic numerals) |
-| pages_scraped | Pages actually scraped so far |
+| pages_scraped | Pages actually downloaded |
 | status | `complete` or `partial` |
-| topics | All chapter headings, pipe-separated |
+| topics | Chapter headings, pipe-separated |
 | url | Shamela book URL |
 | file | Local .txt file path |
 
 ---
 
-## Kaise Chalayein
+## How to Run
 
 ```bash
-# Virtual environment activate karo
 cd /home/ubuntu/shamela_project
 source shamela_env/bin/activate
-
-# Scraper chalao
-python shamela_scraper.py
-
-# Agar beech mein band karo aur dubara chalao — automatically resume hoga
-python shamela_scraper.py
+python run.py
 ```
 
-### Dependencies
-```
-requests        — HTTP requests
-beautifulsoup4  — HTML parsing
-tqdm            — Progress bars
-```
+Interrupted? Just run again — it resumes automatically.
 
-Install:
+### Install dependencies
 ```bash
 pip install requests beautifulsoup4 tqdm
 ```
 
 ---
 
-## Important Settings (`shamela_scraper.py` mein)
+## Settings (`shamela/config.py`)
 
-| Variable | Default | Matlab |
-|---|---|---|
-| `BASE_URL` | `https://shamela.ws` | Website ka address |
-| `OUTPUT_DIR` | `shamela_output` | Output folder |
-| `DELAY` | `1.5` seconds | Har book ke baad wait |
-| `retries` | `5` | Har request ke liye max retries |
-| `timeout` | `35` seconds | Request timeout |
-| `time.sleep(0.3)` | 0.3 seconds | Pages ke beech delay |
-
-`DELAY` kam karne se scraping fast hogi lekin server ban ka risk hai.
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `BASE_URL` | `https://shamela.ws` | Website root |
+| `OUTPUT_DIR` | `shamela_output` | Where files are saved |
+| `DELAY` | `1.5s` | Wait between books |
+| `RETRIES` | `5` | Max retries per request |
+| `TIMEOUT` | `35s` | Request timeout |
+| `PAGE_DELAY` | `0.3s` | Wait between pages inside a book |
 
 ---
 
 ## Common Issues
 
-| Error | Wajah | Fix |
-|---|---|---|
-| `ModuleNotFoundError: tqdm` | venv mein install nahi | `pip install tqdm` |
-| `Read timed out` | Server slow hai | Auto-retry hoga, rukne ki zarurat nahi |
-| Pages scraped < total pages | Pehle timeout hua tha | progress.json mein `status: partial` karo, dubara chalao |
-| Arabic text garbled | Wrong encoding | File UTF-8 mein kholo |
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `ModuleNotFoundError: tqdm` | Not installed in venv | `pip install tqdm` |
+| `Read timed out` | Server is slow | Auto-retries handle it |
+| `pages_scraped < total_pages` | Previous timeout | Set `status: partial` in progress.json, re-run |
+| Arabic text garbled | Wrong encoding | Open the file as UTF-8 |
