@@ -1,8 +1,16 @@
 # shamela/git_sync.py
 # ─────────────────────────────────────────────
-# Auto-pushes scraped output to GitHub after
-# every book completes. Runs git add, commit,
-# and push silently in the background.
+# Auto-pushes ALL scraped output to GitHub after
+# every book completes.
+#
+# What gets committed in every push:
+#   - The new .txt file for the book just scraped
+#   - Any new category subfolder (e.g. shamela_output/الفقه/)
+#   - Updated progress.json  (latest status of all books)
+#   - Updated report.csv     (latest CSV summary)
+#
+# If nothing changed (e.g. a book failed), the commit
+# is skipped silently — no empty commits in the history.
 
 import subprocess
 from tqdm import tqdm

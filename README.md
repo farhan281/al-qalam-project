@@ -21,6 +21,7 @@ shamela_project/
 │   ├── discovery.py         ← Fetches category list and book list
 │   ├── scraper.py           ← Core AJAX page-by-page download loop
 │   ├── report.py            ← Generates report.csv
+│   ├── git_sync.py          ← Auto-commits and pushes to GitHub after every book
 │   └── main.py              ← Orchestrates the full run with tqdm bars
 │
 ├── shamela_env/             ← Python virtual environment
@@ -203,6 +204,31 @@ Plain text, UTF-8, one file per book.
 | topics | Chapter headings, pipe-separated |
 | url | Shamela book URL |
 | file | Local .txt file path |
+
+---
+
+## GitHub Auto-Sync (`git_sync.py`)
+
+After every book completes, the scraper automatically:
+1. `git add --all shamela_output/` — stages the new `.txt`, updated `progress.json` and `report.csv`, and any new category folder
+2. `git commit -m "scraped: <book title>"`
+3. `git push origin master`
+
+Each commit in the GitHub history represents one fully scraped book.
+If a book fails or nothing changed, the push is skipped silently — no empty commits.
+
+What each commit contains:
+```
+shamela_output/العقيدة/الفقه_الأكبر.txt   ← new book text
+shamela_output/progress.json               ← updated status
+shamela_output/report.csv                  ← updated summary
+```
+
+When the repo gets too large, create a new repo and update `origin`:
+```bash
+git remote set-url origin https://github.com/<user>/<new-repo>.git
+git push origin master
+```
 
 ---
 
