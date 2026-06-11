@@ -213,7 +213,7 @@
     "cat_id": "29",
     "book_index": 9,
     "book_id": "37469",
-    "page_id": 11
+    "page_id": 22
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -759,9 +759,9 @@
     "book_id": "37469",
     "url": "https://shamela.ws/book/37469",
     "file": "shamela_output/كتب_اللغة/الإتباع_-_أبو_الطيب_اللغوي.txt",
-    "pages": 10,
+    "pages": 21,
     "status": "partial",
-    "scraped_at": "11-06-2026 20:23:18 IST",
-    "next_page_id": 11
+    "scraped_at": "11-06-2026 20:23:30 IST",
+    "next_page_id": 22
   }
 }
