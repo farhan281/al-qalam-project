@@ -1,6 +1,6 @@
-﻿category,book,book_id,author,publisher,edition,total_pages,pages_scraped,status,scraped_at,topics,url,file,book_index,cat_index,الكتاب,المحقق,صفحة المؤلف,عام النشر,قدمه للشاملة
-الفرق_والردود,التسعينية,17581,,,,,80,partial,11-06-2026 18:49:01 IST,,https://shamela.ws/book/17581,shamela_output/الفرق_والردود/التسعينية.txt,,,,,,,
-الفرق_والردود,العثمانية,96338,,,,,276,partial,11-06-2026 18:49:01 IST,,https://shamela.ws/book/96338,shamela_output/الفرق_والردود/العثمانية.txt,,,,,,,
-الفرق_والردود,المختار في الرد على النصارى,37716,,,,,38,partial,11-06-2026 18:49:01 IST,,https://shamela.ws/book/37716,shamela_output/الفرق_والردود/المختار_في_الرد_على_النصارى.txt,,,,,,,
-الفرق_والردود,مقالات الإسلاميين ت ريتر,37614,,,,,607,partial,11-06-2026 18:49:01 IST,,https://shamela.ws/book/37614,shamela_output/الفرق_والردود/مقالات_الإسلاميين_ت_ريتر.txt,,,,,,,
-الفرق_والردود,مقالات الإسلاميين ت زرزور,4137,,,,,21,partial,11-06-2026 18:49:01 IST,,https://shamela.ws/book/4137,shamela_output/الفرق_والردود/مقالات_الإسلاميين_ت_زرزور.txt,,,,,,,
+﻿category,book,book_id,author,publisher,edition,total_pages,pages_scraped,status,scraped_at,topics,url,file,book_index,cat_index,اختصره,الكتاب,المحقق,تنبيه,صفحة المؤلف,عام النشر,قدمه للشاملة,مؤلف الأصل
+الفرق_والردود,التسعينية,17581,,,,,80,partial,11-06-2026 18:52:00 IST,,https://shamela.ws/book/17581,shamela_output/الفرق_والردود/التسعينية.txt,,,,,,,,,,
+الفرق_والردود,العثمانية,96338,,,,,276,partial,11-06-2026 18:52:00 IST,,https://shamela.ws/book/96338,shamela_output/الفرق_والردود/العثمانية.txt,,,,,,,,,,
+الفرق_والردود,المختار في الرد على النصارى,37716,,,,,38,partial,11-06-2026 18:52:00 IST,,https://shamela.ws/book/37716,shamela_output/الفرق_والردود/المختار_في_الرد_على_النصارى.txt,,,,,,,,,,
+الفرق_والردود,مقالات الإسلاميين ت ريتر,37614,,,,,607,partial,11-06-2026 18:52:00 IST,,https://shamela.ws/book/37614,shamela_output/الفرق_والردود/مقالات_الإسلاميين_ت_ريتر.txt,,,,,,,,,,
+الفرق_والردود,مقالات الإسلاميين ت زرزور,4137,,,,,120,partial,11-06-2026 18:52:00 IST,,https://shamela.ws/book/4137,shamela_output/الفرق_والردود/مقالات_الإسلاميين_ت_زرزور.txt,,,,,,,,,,
