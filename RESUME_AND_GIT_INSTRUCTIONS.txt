@@ -1,0 +1,51 @@
+Good — resume now saves the last page and scraped_at. Quick commands and checks:
+
+Run / resume (same as before):
+
+cd /home/ubuntu/shamela_project
+source shamela_env/bin/activate
+python run.py
+
+Inspect saved cursor + partials:
+
+python - <<'PY'
+import json
+p='shamela_output/progress.json'
+try:
+    d=json.load(open(p,encoding='utf-8'))
+except Exception:
+    print('no progress.json found')
+    raise SystemExit(0)
+print('cursor:', d.get('_cursor'))
+partials={k:v for k,v in d.items() if k!='_cursor' and (v.get('status')=='partial' or 'next_page_id' in v)}
+print('partial count', len(partials))
+for k,v in list(partials.items())[:10]:
+    print(k, v.get('pages'), v.get('next_page_id'), v.get('scraped_at'))
+PY
+
+Force restart from beginning (clear cursor):
+
+python - <<'PY'
+import json
+p='shamela_output/progress.json'
+d=json.load(open(p,encoding='utf-8'))
+d.pop('_cursor', None)
+json.dump(d, open(p,'w',encoding='utf-8'), ensure_ascii=False, indent=2)
+print('cursor cleared')
+PY
+
+Git push failing (exit 128): check remote & auth:
+
+# show remotes
+git remote -v
+
+# try pushing to origin
+git push origin master
+
+# if auth fails, authenticate with GitHub CLI
+gh auth login
+
+# or switch to SSH remote (replace youruser/yourrepo)
+git remote set-url origin git@github.com:youruser/yourrepo.git
+
+Replace the placeholder with your GitHub repo path if you change the remote URL.

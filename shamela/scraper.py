@@ -153,6 +153,14 @@ def scrape_book(book_id, book_title, resume_page_id=None,
             time.sleep(PAGE_DELAY)  # be gentle with the server between pages
 
         complete = (page_id is None)  # True only if we reached the natural end
+        # Ensure final checkpoint is saved so an interrupt after the last page
+        # still records the book as complete and preserves cursor state.
+        if complete and checkpoint_func:
+            try:
+                checkpoint_func(None, page_count, page_chunk, True)
+            except Exception:
+                # Don't let checkpoint failures break the return path
+                pass
 
     finally:
         pbar.close()  # always close the bar, even if an exception occurred

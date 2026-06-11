@@ -52,7 +52,7 @@ def _book_row(fpath, cat, by_id):
         "total_pages":   e.get("total_pages", ""),
         "pages_scraped": pages_scraped,
         "status":        e.get("status", "partial"),
-        "scraped_at":    e.get("scraped_at", ""),  # saved at scrape time in Indian time
+        "scraped_at":    e.get("scraped_at") or india_now(),  # saved at scrape time in Indian time
         "topics":        e.get("topics", ""),
         "url":           url,
         "file":          fpath,
