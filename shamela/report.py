@@ -79,7 +79,13 @@ def generate_report(done):
 
     Called after every book so both CSVs stay in sync.
     """
-    by_id      = {k.split("_")[1]: v for k, v in done.items()}
+    # Build lookup: book_id -> progress entry
+    # Guard against malformed keys that don't contain '_'
+    by_id = {}
+    for k, v in done.items():
+        parts = k.split("_", 1)
+        if len(parts) == 2:
+            by_id[parts[1]] = v
     all_rows   = []
 
     for cat in sorted(os.listdir(OUTPUT_DIR)):
