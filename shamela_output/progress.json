@@ -213,7 +213,7 @@
     "cat_id": "29",
     "book_index": 4,
     "book_id": "17819",
-    "page_id": 128
+    "page_id": 144
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -625,9 +625,9 @@
     "book_id": "17819",
     "url": "https://shamela.ws/book/17819",
     "file": "shamela_output/كتب_اللغة/المذكر_والمؤنث.txt",
-    "pages": 127,
+    "pages": 143,
     "status": "partial",
-    "scraped_at": "11-06-2026 19:38:19 IST",
-    "next_page_id": 128
+    "scraped_at": "11-06-2026 19:39:00 IST",
+    "next_page_id": 144
   }
 }
