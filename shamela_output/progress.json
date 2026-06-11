@@ -213,7 +213,7 @@
     "cat_id": "23",
     "book_index": 7,
     "book_id": "13027",
-    "page_id": 359
+    "page_id": 371
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -485,9 +485,9 @@
     "book_id": "13027",
     "url": "https://shamela.ws/book/13027",
     "file": "shamela_output/الرقائق_والآداب_والأذكار/الزهد_لهناد_بن_السري.txt",
-    "pages": 350,
+    "pages": 362,
     "status": "partial",
-    "scraped_at": "11-06-2026 20:18:45 IST",
-    "next_page_id": 359
+    "scraped_at": "11-06-2026 20:19:08 IST",
+    "next_page_id": 371
   }
 }
