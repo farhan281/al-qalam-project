@@ -3,19 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environments
-venv/
+# Virtual environment
 shamela_env/
-
-# Scraper output
-shamela_output/
-!shamela_output/
-!shamela_output/progress.json
-!shamela_output/report.csv
-shamela_output/**/
+venv/
 
 # OS files
 .DS_Store
 
-# IDE/project files
+# IDE files
 .vscode/
