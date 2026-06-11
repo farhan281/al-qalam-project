@@ -178,6 +178,7 @@ Master report — every book from every category in one file.
 
 ### `shamela_output/<category>/report.csv`
 Per-category report — only the books inside that folder.
+Named after the category e.g. `العقيدة.csv`, `الفقه.csv`.
 Updated automatically after every book in that category.
 
 ### `shamela_output/progress.json`

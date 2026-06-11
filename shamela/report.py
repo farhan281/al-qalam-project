@@ -84,9 +84,9 @@ def generate_report(done):
             cat_rows.append(row)
             all_rows.append(row)
 
-        # Write per-category CSV inside the category folder
+        # Write per-category CSV inside the category folder — named after the category
         if cat_rows:
-            _write_csv(os.path.join(cat_path, "report.csv"), cat_rows)
+            _write_csv(os.path.join(cat_path, f"{cat}.csv"), cat_rows)
 
     # Write master CSV at the top level
     _write_csv(REPORT, all_rows)
