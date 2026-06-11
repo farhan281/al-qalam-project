@@ -191,9 +191,7 @@
   "_cursor": {
     "cat_index": 0,
     "cat_id": "23",
-    "book_index": 0,
-    "book_id": "7528",
-    "page_id": 103
+    "book_index": 1
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -276,9 +274,14 @@
   },
   "23_7528": {
     "title": "الأدب الصغير والأدب الكبير",
-    "pages": 102,
-    "status": "partial",
-    "scraped_at": "11-06-2026 18:04:44 IST",
-    "next_page_id": 103
+    "pages": 131,
+    "status": "complete",
+    "scraped_at": "11-06-2026 18:05:14 IST",
+    "author": "عبد الله بن المقفع (ت ١٤٢هـ)",
+    "publisher": "دار صادر - بيروت",
+    "edition": "",
+    "total_pages": "١٣٩",
+    "topics": "مقدمة | الأدب الصغير | الأدب الكبير | الفهارس",
+    "category": "الرقائق والآداب والأذكار"
   }
 }
