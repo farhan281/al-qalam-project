@@ -20,6 +20,7 @@ from .helpers import load_progress, save_progress, safe_name, ar2int
 from .discovery import get_categories, get_books
 from .scraper import scrape_book
 from .report import generate_report
+from .git_sync import git_push
 
 
 def main():
@@ -132,6 +133,7 @@ def main():
             done[done_key] = new_entry
             save_progress(done)    # write progress.json immediately
             generate_report(done)  # keep report.csv in sync
+            git_push(f"scraped: {book_title[:60]}")
             time.sleep(DELAY)
 
         book_bar.close()
