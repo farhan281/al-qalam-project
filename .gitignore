@@ -9,6 +9,10 @@ shamela_env/
 
 # Scraper output
 shamela_output/
+!shamela_output/
+!shamela_output/progress.json
+!shamela_output/report.csv
+shamela_output/**/
 
 # OS files
 .DS_Store

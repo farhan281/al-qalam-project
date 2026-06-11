@@ -28,7 +28,8 @@ DEPENDENCIES:
   pip install requests beautifulsoup4 tqdm
 """
 
-import requests, os, re, time, json, csv
+import requests, os, re, time, json, csv, subprocess
+from datetime import datetime
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
@@ -111,6 +112,51 @@ def save_progress(done):
     with open(PROGRESS, "w", encoding="utf-8") as f:
         json.dump(done, f, ensure_ascii=False, indent=2)
 
+def git_autoupdate():
+    """
+    Stage tracked project files, commit if needed, and push changes to the remote.
+    """
+    if not os.path.isdir(".git"):
+        tqdm.write("🔧 Git repo not found, skipping auto-update.")
+        return
+
+    tracked_files = [
+        ".gitignore",
+        "README.md",
+        "requirements.txt",
+        "shamela_scraper.py",
+        os.path.join(OUTPUT_DIR, "progress.json"),
+        os.path.join(OUTPUT_DIR, "report.csv"),
+    ]
+    files_to_add = [p for p in tracked_files if os.path.exists(p)]
+    if not files_to_add:
+        tqdm.write("🔧 No tracked files found for git update.")
+        return
+
+    r = subprocess.run(["git", "add"] + files_to_add, capture_output=True, text=True)
+    if r.returncode != 0:
+        tqdm.write(f"🔧 Git add failed: {r.stderr.strip()}")
+        return
+
+    r = subprocess.run(["git", "diff", "--cached", "--quiet"], capture_output=True, text=True)
+    if r.returncode == 0:
+        tqdm.write("✅ Git auto-update: no changes to commit.")
+        return
+
+    commit_msg = f"Auto-update repository: progress report {datetime.utcnow().isoformat()}Z"
+    r = subprocess.run(["git", "commit", "-m", commit_msg], capture_output=True, text=True)
+    if r.returncode != 0:
+        tqdm.write(f"🔧 Git commit failed: {r.stderr.strip()}")
+        return
+
+    branch = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True, text=True)
+    branch_name = branch.stdout.strip() if branch.returncode == 0 else "master"
+    r = subprocess.run(["git", "push", "origin", branch_name], capture_output=True, text=True)
+    if r.returncode != 0:
+        tqdm.write(f"🔧 Git push failed: {r.stderr.strip()}")
+        return
+
+    tqdm.write(f"✅ Git auto-update pushed to origin/{branch_name}")
 # ── Metadata ───────────────────────────────────────────────────────────────────
 
 def fetch_meta(book_soup):
@@ -523,6 +569,7 @@ def main():
         book_bar.close()
 
     generate_report(done)
+    git_autoupdate()
     tqdm.write(f"\n🎉 Done! Output in: {OUTPUT_DIR}/")
 
 
