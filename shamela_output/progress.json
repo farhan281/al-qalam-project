@@ -213,7 +213,7 @@
     "cat_id": "34",
     "book_index": 13,
     "book_id": "133412",
-    "page_id": 971
+    "page_id": null
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -826,9 +826,9 @@
     "book_id": "133412",
     "url": "https://shamela.ws/book/133412",
     "file": "shamela_output/الشعر_ودواوينه/ديوان_جرير_بشرح_محمد_بن_حبيب.txt",
-    "pages": 970,
+    "pages": 992,
     "status": "partial",
-    "scraped_at": "11-06-2026 20:19:54 IST",
-    "next_page_id": 971
+    "scraped_at": "11-06-2026 20:20:27 IST",
+    "next_page_id": null
   }
 }
