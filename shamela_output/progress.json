@@ -213,7 +213,7 @@
     "cat_id": "40",
     "book_index": 12,
     "book_id": "9737",
-    "page_id": 2
+    "page_id": 24
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -753,9 +753,9 @@
     "book_id": "9737",
     "url": "https://shamela.ws/book/9737",
     "file": "shamela_output/علوم_أخرى/رسالة_النفس.txt",
-    "pages": 1,
+    "pages": 23,
     "status": "partial",
-    "scraped_at": "11-06-2026 20:21:16 IST",
-    "next_page_id": 2
+    "scraped_at": "11-06-2026 20:21:43 IST",
+    "next_page_id": 24
   }
 }
