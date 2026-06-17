@@ -1,7 +1,7 @@
 {
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "40",
+    "cat_id": "1",
     "book_index": 2
   },
   "30_1682": {
@@ -25,14 +25,21 @@
   },
   "40_9093": {
     "title": "الأنواء في مواسم العرب لابن قتيبة الدينوري",
-    "pages": 256,
+    "pages": 226,
+    "status": "partial",
+    "scraped_at": "17-06-2026 14:39:05 IST",
+    "next_page_id": 227
+  },
+  "1_6388": {
+    "title": "الفقه الأكبر",
+    "pages": 92,
     "status": "complete",
-    "scraped_at": "17-06-2026 14:39:30 IST",
-    "author": "أبو محمد عبد الله بن مسلم بن قتيبة الدينوري (ت ٢٧٦هـ)",
-    "publisher": "",
-    "edition": "",
-    "total_pages": "٢١٠",
+    "scraped_at": "17-06-2026 14:40:19 IST",
+    "author": "ينسب لأبي حنيفة النعمان (ت ١٥٠هـ)",
+    "publisher": "مكتبة الفرقان - الإمارات العربية",
+    "edition": "الأولى، ١٤١٩هـ - ١٩٩٩م",
+    "total_pages": "١٦٧",
     "topics": "",
-    "category": "علوم أخرى"
+    "category": "العقيدة"
   }
 }
