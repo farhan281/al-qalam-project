@@ -1,3 +1,4 @@
 ﻿category,book,book_id,author,publisher,edition,total_pages,pages_scraped,status,scraped_at,topics,url,file
-الفقه_المالكي,المدونة,587,,,,,2437,complete,17-06-2026 13:40:25 IST,,https://shamela.ws/book/587,shamela_output/الفقه_المالكي/المدونة.txt
-الفقه_المالكي,مجالس ابن القاسم التي سأل عنها مالكا,96602,,,,,90,complete,17-06-2026 13:41:09 IST,,https://shamela.ws/book/96602,shamela_output/الفقه_المالكي/مجالس_ابن_القاسم_التي_سأل_عنها_مالكا.txt
+الفقه_المالكي,المدونة,587,,,,,2437,partial,17-06-2026 13:17:23 IST,,https://shamela.ws/book/587,shamela_output/الفقه_المالكي/المدونة.txt
+الفقه_المالكي,كتاب الحج من مدونة أشهب,1267,,,,,117,partial,17-06-2026 13:42:50 IST,,https://shamela.ws/book/1267,shamela_output/الفقه_المالكي/كتاب_الحج_من_مدونة_أشهب.txt
+الفقه_المالكي,مجالس ابن القاسم التي سأل عنها مالكا,96602,,,,,90,partial,17-06-2026 13:42:50 IST,,https://shamela.ws/book/96602,shamela_output/الفقه_المالكي/مجالس_ابن_القاسم_التي_سأل_عنها_مالكا.txt
