@@ -2,7 +2,7 @@
   "_cursor": {
     "cat_index": 0,
     "cat_id": "39",
-    "book_index": 1
+    "book_index": 2
   },
   "30_1682": {
     "title": "العين",
@@ -23,5 +23,11 @@
     "pages": 19,
     "status": "complete",
     "scraped_at": "17-06-2026 14:21:06 IST"
+  },
+  "39_1605": {
+    "title": "العلم الظاهر في نفع النسب الطاهر - ط إسطنبول",
+    "pages": 7,
+    "status": "complete",
+    "scraped_at": "17-06-2026 14:21:16 IST"
   }
 }
