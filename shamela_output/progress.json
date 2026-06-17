@@ -210,10 +210,10 @@
   },
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "29",
-    "book_index": 0,
-    "book_id": "133417",
-    "page_id": 237
+    "cat_id": "1",
+    "book_index": 134,
+    "book_id": "6462",
+    "page_id": 225
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -614,23 +614,15 @@
   },
   "1_7318": {
     "title": "مختصر العلو للعلي العظيم",
-    "pages": 11,
-    "status": "partial",
-    "scraped_at": "17-06-2026 13:16:40 IST",
-    "next_page_id": 12
+    "pages": 301,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:20:35 IST"
   },
-  "15_587": {
-    "title": "المدونة",
-    "pages": 99,
+  "1_6462": {
+    "title": "الروح - ابن القيم - ط العلمية",
+    "pages": 224,
     "status": "partial",
-    "scraped_at": "17-06-2026 13:17:23 IST",
-    "next_page_id": 100
-  },
-  "29_133417": {
-    "title": "النوادر في اللغة لأبي زيد الأنصاري",
-    "pages": 236,
-    "status": "partial",
-    "scraped_at": "17-06-2026 13:20:36 IST",
-    "next_page_id": 237
+    "scraped_at": "17-06-2026 13:23:44 IST",
+    "next_page_id": 225
   }
 }
