@@ -1,33 +1,33 @@
 {
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "39",
+    "cat_id": "32",
     "book_index": 2
   },
   "30_1682": {
     "title": "العين",
-    "pages": 96,
+    "pages": 68,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:20:30 IST",
-    "next_page_id": 97
+    "scraped_at": "17-06-2026 14:20:07 IST",
+    "next_page_id": 69
   },
-  "36_4135": {
-    "title": "الهوامل والشوامل",
-    "pages": 19,
+  "31_6961": {
+    "title": "الجمل في النحو",
+    "pages": 5,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:20:47 IST",
-    "next_page_id": 20
+    "scraped_at": "17-06-2026 14:20:13 IST",
+    "next_page_id": 6
   },
-  "39_1636": {
-    "title": "إجابة الغوث ببيان حال النقباء والنجباء والأبدال والأوتاد والغوث - ط إسطنبول",
-    "pages": 19,
+  "32_964": {
+    "title": "خطبة واصل بن عطاء - ضمن نوادر المخطوطات",
+    "pages": 20,
     "status": "complete",
-    "scraped_at": "17-06-2026 14:21:06 IST"
+    "scraped_at": "17-06-2026 14:20:31 IST"
   },
-  "39_1605": {
-    "title": "العلم الظاهر في نفع النسب الطاهر - ط إسطنبول",
-    "pages": 7,
+  "32_37540": {
+    "title": "الأدب الصغير ت خلف",
+    "pages": 72,
     "status": "complete",
-    "scraped_at": "17-06-2026 14:21:16 IST"
+    "scraped_at": "17-06-2026 14:21:31 IST"
   }
 }
