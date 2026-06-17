@@ -1,23 +1,42 @@
 {
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "36",
-    "book_index": 0,
-    "book_id": "4135",
-    "page_id": 105
+    "cat_id": "32",
+    "book_index": 2,
+    "book_id": "26537",
+    "page_id": 40
   },
   "30_1682": {
     "title": "العين",
-    "pages": 96,
+    "pages": 68,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:20:30 IST",
-    "next_page_id": 97
+    "scraped_at": "17-06-2026 14:20:07 IST",
+    "next_page_id": 69
   },
-  "36_4135": {
-    "title": "الهوامل والشوامل",
-    "pages": 104,
+  "31_6961": {
+    "title": "الجمل في النحو",
+    "pages": 5,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:21:56 IST",
-    "next_page_id": 105
+    "scraped_at": "17-06-2026 14:20:13 IST",
+    "next_page_id": 6
+  },
+  "32_964": {
+    "title": "خطبة واصل بن عطاء - ضمن نوادر المخطوطات",
+    "pages": 20,
+    "status": "complete",
+    "scraped_at": "17-06-2026 14:20:31 IST"
+  },
+  "32_37540": {
+    "title": "الأدب الصغير ت خلف",
+    "pages": 72,
+    "status": "complete",
+    "scraped_at": "17-06-2026 14:21:31 IST"
+  },
+  "32_26537": {
+    "title": "كليلة ودمنة",
+    "pages": 39,
+    "status": "partial",
+    "scraped_at": "17-06-2026 14:22:06 IST",
+    "next_page_id": 40
   }
 }
