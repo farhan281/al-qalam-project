@@ -210,10 +210,10 @@
   },
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "1",
-    "book_index": 135,
-    "book_id": "390",
-    "page_id": 443
+    "cat_id": "29",
+    "book_index": 4,
+    "book_id": "17819",
+    "page_id": 420
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -614,21 +614,47 @@
   },
   "1_7318": {
     "title": "مختصر العلو للعلي العظيم",
-    "pages": 301,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:20:35 IST"
-  },
-  "1_6462": {
-    "title": "الروح - ابن القيم - ط العلمية",
-    "pages": 263,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:24:14 IST"
-  },
-  "1_390": {
-    "title": "الروح - ابن القيم - ط عطاءات العلم",
-    "pages": 442,
+    "pages": 11,
     "status": "partial",
-    "scraped_at": "17-06-2026 13:30:25 IST",
-    "next_page_id": 443
+    "scraped_at": "17-06-2026 13:16:40 IST",
+    "next_page_id": 12
+  },
+  "15_587": {
+    "title": "المدونة",
+    "pages": 99,
+    "status": "partial",
+    "scraped_at": "17-06-2026 13:17:23 IST",
+    "next_page_id": 100
+  },
+  "29_133417": {
+    "title": "النوادر في اللغة لأبي زيد الأنصاري",
+    "pages": 463,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:23:43 IST"
+  },
+  "29_7508": {
+    "title": "إصلاح المنطق",
+    "pages": 386,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:29:01 IST"
+  },
+  "29_5420": {
+    "title": "القلب والإبدال",
+    "pages": 28,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:29:35 IST"
+  },
+  "29_29605": {
+    "title": "الملاحن",
+    "pages": 54,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:30:24 IST"
+  },
+  "29_17819": {
+    "title": "المذكر والمؤنث",
+    "pages": 419,
+    "status": "partial",
+    "scraped_at": "17-06-2026 13:36:18 IST",
+    "next_page_id": 420
   }
 }
