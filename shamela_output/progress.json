@@ -213,7 +213,7 @@
     "cat_id": "29",
     "book_index": 4,
     "book_id": "17819",
-    "page_id": 722
+    "page_id": 759
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -652,9 +652,9 @@
   },
   "29_17819": {
     "title": "المذكر والمؤنث",
-    "pages": 721,
+    "pages": 758,
     "status": "partial",
-    "scraped_at": "17-06-2026 13:40:25 IST",
-    "next_page_id": 722
+    "scraped_at": "17-06-2026 13:40:56 IST",
+    "next_page_id": 759
   }
 }
