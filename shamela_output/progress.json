@@ -1,34 +1,26 @@
 {
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "35",
+    "cat_id": "40",
     "book_index": 1
   },
   "30_1682": {
     "title": "العين",
-    "pages": 68,
+    "pages": 471,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:20:07 IST",
-    "next_page_id": 69
+    "scraped_at": "17-06-2026 14:25:35 IST",
+    "next_page_id": 472
   },
-  "31_6961": {
-    "title": "الجمل في النحو",
-    "pages": 15,
-    "status": "partial",
-    "scraped_at": "17-06-2026 14:20:21 IST",
-    "next_page_id": 16
-  },
-  "34_149481": {
-    "title": "ديوان عمرو بن قميئة",
-    "pages": 6,
-    "status": "partial",
-    "scraped_at": "17-06-2026 14:20:26 IST",
-    "next_page_id": 7
-  },
-  "35_11661": {
-    "title": "البديع في البديع لابن المعتز",
-    "pages": 172,
+  "40_21615": {
+    "title": "تفسير الأحلام = منتخب الكلام في تفسير الأحلام",
+    "pages": 830,
     "status": "complete",
-    "scraped_at": "17-06-2026 14:22:43 IST"
+    "scraped_at": "17-06-2026 14:36:02 IST",
+    "author": "ينسب لمحمد بن سيرين (ت ١١٠هـ) ولا تصح نسبته له",
+    "publisher": "شركة مكتبة ومطبعة مصطفى البابي الحلبي وأولاده",
+    "edition": "",
+    "total_pages": "",
+    "topics": "",
+    "category": "علوم أخرى"
   }
 }
