@@ -2,7 +2,7 @@
   "_cursor": {
     "cat_index": 0,
     "cat_id": "40",
-    "book_index": 1
+    "book_index": 2
   },
   "30_1682": {
     "title": "العين",
@@ -20,6 +20,18 @@
     "publisher": "شركة مكتبة ومطبعة مصطفى البابي الحلبي وأولاده",
     "edition": "",
     "total_pages": "",
+    "topics": "",
+    "category": "علوم أخرى"
+  },
+  "40_9093": {
+    "title": "الأنواء في مواسم العرب لابن قتيبة الدينوري",
+    "pages": 256,
+    "status": "complete",
+    "scraped_at": "17-06-2026 14:39:30 IST",
+    "author": "أبو محمد عبد الله بن مسلم بن قتيبة الدينوري (ت ٢٧٦هـ)",
+    "publisher": "",
+    "edition": "",
+    "total_pages": "٢١٠",
     "topics": "",
     "category": "علوم أخرى"
   }
