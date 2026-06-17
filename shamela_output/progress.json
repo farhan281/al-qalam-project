@@ -211,7 +211,9 @@
   "_cursor": {
     "cat_index": 0,
     "cat_id": "15",
-    "book_index": 6
+    "book_index": 6,
+    "book_id": "8487",
+    "page_id": 16
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -652,5 +654,12 @@
     "pages": 62,
     "status": "complete",
     "scraped_at": "17-06-2026 13:55:06 IST"
+  },
+  "15_8487": {
+    "title": "التهذيب في اختصار المدونة",
+    "pages": 15,
+    "status": "partial",
+    "scraped_at": "17-06-2026 13:55:22 IST",
+    "next_page_id": 16
   }
 }
