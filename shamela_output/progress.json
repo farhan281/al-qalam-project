@@ -1,10 +1,10 @@
 {
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "32",
+    "cat_id": "33",
     "book_index": 2,
-    "book_id": "26537",
-    "page_id": 40
+    "book_id": "10911",
+    "page_id": 19
   },
   "30_1682": {
     "title": "العين",
@@ -15,28 +15,28 @@
   },
   "31_6961": {
     "title": "الجمل في النحو",
-    "pages": 5,
+    "pages": 9,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:20:13 IST",
-    "next_page_id": 6
+    "scraped_at": "17-06-2026 14:20:16 IST",
+    "next_page_id": 10
   },
-  "32_964": {
-    "title": "خطبة واصل بن عطاء - ضمن نوادر المخطوطات",
-    "pages": 20,
+  "33_737": {
+    "title": "القوافي للأخفش الأوسط",
+    "pages": 18,
     "status": "complete",
-    "scraped_at": "17-06-2026 14:20:31 IST"
+    "scraped_at": "17-06-2026 14:20:34 IST"
   },
-  "32_37540": {
-    "title": "الأدب الصغير ت خلف",
-    "pages": 72,
+  "33_6917": {
+    "title": "العروض",
+    "pages": 101,
     "status": "complete",
-    "scraped_at": "17-06-2026 14:21:31 IST"
+    "scraped_at": "17-06-2026 14:21:55 IST"
   },
-  "32_26537": {
-    "title": "كليلة ودمنة",
-    "pages": 39,
+  "33_10911": {
+    "title": "القوافي للتنوخي",
+    "pages": 18,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:22:06 IST",
-    "next_page_id": 40
+    "scraped_at": "17-06-2026 14:22:13 IST",
+    "next_page_id": 19
   }
 }
