@@ -1,7 +1,7 @@
 {
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "33",
+    "cat_id": "34",
     "book_index": 1
   },
   "30_1682": {
@@ -13,15 +13,15 @@
   },
   "31_6961": {
     "title": "الجمل في النحو",
-    "pages": 9,
+    "pages": 15,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:20:16 IST",
-    "next_page_id": 10
+    "scraped_at": "17-06-2026 14:20:21 IST",
+    "next_page_id": 16
   },
-  "33_737": {
-    "title": "القوافي للأخفش الأوسط",
-    "pages": 18,
+  "34_149481": {
+    "title": "ديوان عمرو بن قميئة",
+    "pages": 54,
     "status": "complete",
-    "scraped_at": "17-06-2026 14:20:34 IST"
+    "scraped_at": "17-06-2026 14:21:04 IST"
   }
 }
