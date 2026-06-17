@@ -210,10 +210,10 @@
   },
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "15",
-    "book_index": 6,
-    "book_id": "8487",
-    "page_id": 16
+    "cat_id": "29",
+    "book_index": 9,
+    "book_id": "37469",
+    "page_id": 81
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -621,45 +621,70 @@
   },
   "15_587": {
     "title": "المدونة",
-    "pages": 2437,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:40:25 IST"
-  },
-  "15_96602": {
-    "title": "مجالس ابن القاسم التي سأل عنها مالكا",
-    "pages": 90,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:41:09 IST"
-  },
-  "15_1267": {
-    "title": "كتاب الحج من مدونة أشهب",
-    "pages": 179,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:43:43 IST"
-  },
-  "15_1206": {
-    "title": "المختصر الصغير لابن عبد الحكم «خلافيات في الفقه»",
-    "pages": 564,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:51:19 IST"
-  },
-  "15_1168": {
-    "title": "الأحكام لعبد الملك بن حبيب",
-    "pages": 198,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:54:08 IST"
-  },
-  "15_18261": {
-    "title": "الرد على الشافعي لابن اللباد",
-    "pages": 62,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:55:06 IST"
-  },
-  "15_8487": {
-    "title": "التهذيب في اختصار المدونة",
-    "pages": 15,
+    "pages": 99,
     "status": "partial",
-    "scraped_at": "17-06-2026 13:55:22 IST",
-    "next_page_id": 16
+    "scraped_at": "17-06-2026 13:17:23 IST",
+    "next_page_id": 100
+  },
+  "29_133417": {
+    "title": "النوادر في اللغة لأبي زيد الأنصاري",
+    "pages": 463,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:23:43 IST"
+  },
+  "29_7508": {
+    "title": "إصلاح المنطق",
+    "pages": 386,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:29:01 IST"
+  },
+  "29_5420": {
+    "title": "القلب والإبدال",
+    "pages": 28,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:29:35 IST"
+  },
+  "29_29605": {
+    "title": "الملاحن",
+    "pages": 54,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:30:24 IST"
+  },
+  "29_17819": {
+    "title": "المذكر والمؤنث",
+    "pages": 893,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:42:50 IST"
+  },
+  "29_6925": {
+    "title": "الألفاظ = الكتابة والتعبير",
+    "pages": 147,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:44:55 IST"
+  },
+  "29_14565": {
+    "title": "المقصور والممدود لابن ولاد",
+    "pages": 168,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:47:24 IST"
+  },
+  "29_14569": {
+    "title": "المقصور والممدود المنسوب لأبي عمر الزاهد",
+    "pages": 20,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:47:45 IST"
+  },
+  "29_14443": {
+    "title": "تصحيح الفصيح وشرحه",
+    "pages": 518,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:55:00 IST"
+  },
+  "29_37469": {
+    "title": "الإتباع - أبو الطيب اللغوي",
+    "pages": 80,
+    "status": "partial",
+    "scraped_at": "17-06-2026 13:56:14 IST",
+    "next_page_id": 81
   }
 }
