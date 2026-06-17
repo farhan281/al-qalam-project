@@ -1,27 +1,27 @@
 {
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "34",
+    "cat_id": "39",
     "book_index": 1
   },
   "30_1682": {
     "title": "العين",
-    "pages": 68,
+    "pages": 96,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:20:07 IST",
-    "next_page_id": 69
+    "scraped_at": "17-06-2026 14:20:30 IST",
+    "next_page_id": 97
   },
-  "31_6961": {
-    "title": "الجمل في النحو",
-    "pages": 15,
+  "36_4135": {
+    "title": "الهوامل والشوامل",
+    "pages": 19,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:20:21 IST",
-    "next_page_id": 16
+    "scraped_at": "17-06-2026 14:20:47 IST",
+    "next_page_id": 20
   },
-  "34_149481": {
-    "title": "ديوان عمرو بن قميئة",
-    "pages": 54,
+  "39_1636": {
+    "title": "إجابة الغوث ببيان حال النقباء والنجباء والأبدال والأوتاد والغوث - ط إسطنبول",
+    "pages": 19,
     "status": "complete",
-    "scraped_at": "17-06-2026 14:21:04 IST"
+    "scraped_at": "17-06-2026 14:21:06 IST"
   }
 }
