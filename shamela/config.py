@@ -24,6 +24,9 @@ PAGE_DELAY = 0.3   # seconds to wait between individual page fetches inside a bo
 # This shares cookies, keeps connections alive, and sets headers once.
 session = requests.Session()
 session.headers.update({
-    "User-Agent": "Mozilla/5.0 (compatible; shamela-scraper/2.0)",  # look like a browser
-    "Accept-Language": "ar,en;q=0.9",                               # request Arabic content
+    # Use a common browser User-Agent and include Accept/Referer to reduce 403s
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Language": "ar,en;q=0.9",
+    "Referer": BASE_URL,
 })

@@ -75,18 +75,24 @@ def scrape_book(book_id, book_title, resume_page_id=None,
         # Fresh: fetch the book landing page first
         s = get_soup(f"{BASE_URL}/book/{book_id}")
         if not s:
-            return None
-
-        meta        = fetch_meta(s)
-        known_total = ar2int(meta.get("total_pages", "0"))
-
-        # First link in the table of contents = first AJAX page ID
-        link = s.select_one("div.betaka-index a[href]")
-        if link:
-            m       = re.search(r"/book/\d+/(\d+)", link.get("href", ""))
-            page_id = int(m.group(1)) if m else 1
+            # Landing page fetch failed (e.g. 403). Fall back to AJAX-only
+            # scraping: we can still fetch individual pages via the
+            # /ajax/pageContent/{book_id}/{page_id} endpoint.
+            tqdm.write(f"    [WARN] landing page for book {book_id} not reachable — falling back to AJAX pages")
+            meta = {}
+            known_total = 0
+            page_id = 1
         else:
-            page_id = 1  # fallback when no TOC is present
+            meta        = fetch_meta(s)
+            known_total = ar2int(meta.get("total_pages", "0"))
+
+            # First link in the table of contents = first AJAX page ID
+            link = s.select_one("div.betaka-index a[href]")
+            if link:
+                m       = re.search(r"/book/\d+/(\d+)", link.get("href", ""))
+                page_id = int(m.group(1)) if m else 1
+            else:
+                page_id = 1  # fallback when no TOC is present
 
     # Inner progress bar — one tick per page
     # known_total gives the % complete; existing_pages sets the starting position
