@@ -2,9 +2,7 @@
   "_cursor": {
     "cat_index": 0,
     "cat_id": "33",
-    "book_index": 0,
-    "book_id": "737",
-    "page_id": 16
+    "book_index": 1
   },
   "30_1682": {
     "title": "العين",
@@ -22,9 +20,8 @@
   },
   "33_737": {
     "title": "القوافي للأخفش الأوسط",
-    "pages": 15,
-    "status": "partial",
-    "scraped_at": "17-06-2026 14:20:31 IST",
-    "next_page_id": 16
+    "pages": 18,
+    "status": "complete",
+    "scraped_at": "17-06-2026 14:20:34 IST"
   }
 }
