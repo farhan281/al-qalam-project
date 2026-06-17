@@ -1,10 +1,8 @@
 {
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "33",
-    "book_index": 2,
-    "book_id": "10911",
-    "page_id": 19
+    "cat_id": "35",
+    "book_index": 1
   },
   "30_1682": {
     "title": "العين",
@@ -15,28 +13,22 @@
   },
   "31_6961": {
     "title": "الجمل في النحو",
-    "pages": 9,
+    "pages": 15,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:20:16 IST",
-    "next_page_id": 10
+    "scraped_at": "17-06-2026 14:20:21 IST",
+    "next_page_id": 16
   },
-  "33_737": {
-    "title": "القوافي للأخفش الأوسط",
-    "pages": 18,
-    "status": "complete",
-    "scraped_at": "17-06-2026 14:20:34 IST"
-  },
-  "33_6917": {
-    "title": "العروض",
-    "pages": 101,
-    "status": "complete",
-    "scraped_at": "17-06-2026 14:21:55 IST"
-  },
-  "33_10911": {
-    "title": "القوافي للتنوخي",
-    "pages": 18,
+  "34_149481": {
+    "title": "ديوان عمرو بن قميئة",
+    "pages": 6,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:22:13 IST",
-    "next_page_id": 19
+    "scraped_at": "17-06-2026 14:20:26 IST",
+    "next_page_id": 7
+  },
+  "35_11661": {
+    "title": "البديع في البديع لابن المعتز",
+    "pages": 172,
+    "status": "complete",
+    "scraped_at": "17-06-2026 14:22:43 IST"
   }
 }
