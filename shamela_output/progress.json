@@ -210,10 +210,10 @@
   },
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "29",
-    "book_index": 8,
-    "book_id": "14443",
-    "page_id": 255
+    "cat_id": "1",
+    "book_index": 137,
+    "book_id": "205",
+    "page_id": 949
   },
   "1_18091": {
     "title": "نقض الدارمي على المريسي - ت الشوامي",
@@ -614,71 +614,33 @@
   },
   "1_7318": {
     "title": "مختصر العلو للعلي العظيم",
-    "pages": 11,
+    "pages": 301,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:20:35 IST"
+  },
+  "1_6462": {
+    "title": "الروح - ابن القيم - ط العلمية",
+    "pages": 263,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:24:14 IST"
+  },
+  "1_390": {
+    "title": "الروح - ابن القيم - ط عطاءات العلم",
+    "pages": 877,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:36:18 IST"
+  },
+  "1_12021": {
+    "title": "شفاء العليل في مسائل القضاء والقدر والحكمة والتعليل - ط المعرفة",
+    "pages": 333,
+    "status": "complete",
+    "scraped_at": "17-06-2026 13:40:56 IST"
+  },
+  "1_205": {
+    "title": "شفاء العليل في مسائل القضاء والقدر والحكمة والتعليل - ط عطاءات العلم",
+    "pages": 948,
     "status": "partial",
-    "scraped_at": "17-06-2026 13:16:40 IST",
-    "next_page_id": 12
-  },
-  "15_587": {
-    "title": "المدونة",
-    "pages": 99,
-    "status": "partial",
-    "scraped_at": "17-06-2026 13:17:23 IST",
-    "next_page_id": 100
-  },
-  "29_133417": {
-    "title": "النوادر في اللغة لأبي زيد الأنصاري",
-    "pages": 463,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:23:43 IST"
-  },
-  "29_7508": {
-    "title": "إصلاح المنطق",
-    "pages": 386,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:29:01 IST"
-  },
-  "29_5420": {
-    "title": "القلب والإبدال",
-    "pages": 28,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:29:35 IST"
-  },
-  "29_29605": {
-    "title": "الملاحن",
-    "pages": 54,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:30:24 IST"
-  },
-  "29_17819": {
-    "title": "المذكر والمؤنث",
-    "pages": 893,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:42:50 IST"
-  },
-  "29_6925": {
-    "title": "الألفاظ = الكتابة والتعبير",
-    "pages": 147,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:44:55 IST"
-  },
-  "29_14565": {
-    "title": "المقصور والممدود لابن ولاد",
-    "pages": 168,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:47:24 IST"
-  },
-  "29_14569": {
-    "title": "المقصور والممدود المنسوب لأبي عمر الزاهد",
-    "pages": 20,
-    "status": "complete",
-    "scraped_at": "17-06-2026 13:47:45 IST"
-  },
-  "29_14443": {
-    "title": "تصحيح الفصيح وشرحه",
-    "pages": 254,
-    "status": "partial",
-    "scraped_at": "17-06-2026 13:51:20 IST",
-    "next_page_id": 255
+    "scraped_at": "17-06-2026 13:54:09 IST",
+    "next_page_id": 949
   }
 }
