@@ -1,33 +1,23 @@
 {
   "_cursor": {
     "cat_index": 0,
-    "cat_id": "33",
-    "book_index": 2
+    "cat_id": "36",
+    "book_index": 0,
+    "book_id": "4135",
+    "page_id": 105
   },
   "30_1682": {
     "title": "العين",
-    "pages": 68,
+    "pages": 96,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:20:07 IST",
-    "next_page_id": 69
+    "scraped_at": "17-06-2026 14:20:30 IST",
+    "next_page_id": 97
   },
-  "31_6961": {
-    "title": "الجمل في النحو",
-    "pages": 9,
+  "36_4135": {
+    "title": "الهوامل والشوامل",
+    "pages": 104,
     "status": "partial",
-    "scraped_at": "17-06-2026 14:20:16 IST",
-    "next_page_id": 10
-  },
-  "33_737": {
-    "title": "القوافي للأخفش الأوسط",
-    "pages": 18,
-    "status": "complete",
-    "scraped_at": "17-06-2026 14:20:34 IST"
-  },
-  "33_6917": {
-    "title": "العروض",
-    "pages": 101,
-    "status": "complete",
-    "scraped_at": "17-06-2026 14:21:55 IST"
+    "scraped_at": "17-06-2026 14:21:56 IST",
+    "next_page_id": 105
   }
 }
